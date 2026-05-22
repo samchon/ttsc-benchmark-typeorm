@@ -860,7 +860,9 @@ export class CockroachDriver implements Driver {
         if (typeof jsonString === "string") {
             jsonString = jsonString.trim()
             if (
-                jsonString.startsWith("e'") && // CockroachDB might escape JSON/JSONB default values with e'...'
+                jsonString.startsWith(
+                    "e'",
+                ) && // CockroachDB might escape JSON/JSONB default values with e'...'
                 jsonString.endsWith("'")
             ) {
                 jsonString = jsonString
@@ -1236,7 +1238,10 @@ export class CockroachDriver implements Driver {
     protected escapeComment(comment?: string) {
         if (!comment) return comment
 
-        comment = comment.replaceAll("'", "''").replaceAll("\u0000", "") // Null bytes aren't allowed in comments
+        comment = comment.replaceAll("'", "''").replaceAll(
+            "\u0000",
+            "",
+        ) // Null bytes aren't allowed in comments
 
         return comment
     }

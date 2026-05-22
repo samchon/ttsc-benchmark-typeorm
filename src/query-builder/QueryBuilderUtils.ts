@@ -13,7 +13,9 @@ export class QueryBuilderUtils {
         if (typeof str !== "string" || str.indexOf(".") === -1) return false
 
         // extra alias and its property relation
-        const [aliasName, propertyName] = str.split(".") // todo: what about relations in embedded?
+        const [aliasName, propertyName] = str.split(
+            ".",
+        ) // todo: what about relations in embedded?
         if (!aliasName || !propertyName) return false
 
         // alias and property must be represented in a special format

@@ -5093,7 +5093,10 @@ export class PostgresQueryRunner
             return "NULL"
         }
 
-        comment = comment.replaceAll("'", "''").replaceAll("\u0000", "") // Null bytes aren't allowed in comments
+        comment = comment.replaceAll("'", "''").replaceAll(
+            "\u0000",
+            "",
+        ) // Null bytes aren't allowed in comments
 
         return `'${comment}'`
     }

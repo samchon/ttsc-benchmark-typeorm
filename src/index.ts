@@ -146,7 +146,9 @@ export { UpdateQueryBuilder } from "./query-builder/UpdateQueryBuilder"
 export { RelationQueryBuilder } from "./query-builder/RelationQueryBuilder"
 export { Brackets } from "./query-builder/Brackets"
 export { NotBrackets } from "./query-builder/NotBrackets"
-export type { WhereExpressionBuilder } from "./query-builder/WhereExpressionBuilder"
+export type {
+    WhereExpressionBuilder,
+} from "./query-builder/WhereExpressionBuilder"
 export { InsertResult } from "./query-builder/result/InsertResult"
 export { UpdateResult } from "./query-builder/result/UpdateResult"
 export { DeleteResult } from "./query-builder/result/DeleteResult"
@@ -162,22 +164,40 @@ export { Migration } from "./migration/Migration"
 export { MigrationExecutor } from "./migration/MigrationExecutor"
 export type { MigrationInterface } from "./migration/MigrationInterface"
 export { DefaultNamingStrategy } from "./naming-strategy/DefaultNamingStrategy"
-export type { NamingStrategyInterface } from "./naming-strategy/NamingStrategyInterface"
+export type {
+    NamingStrategyInterface,
+} from "./naming-strategy/NamingStrategyInterface"
 export type { InsertEvent } from "./subscriber/event/InsertEvent"
 export type { LoadEvent } from "./subscriber/event/LoadEvent"
 export type { UpdateEvent } from "./subscriber/event/UpdateEvent"
 export type { RemoveEvent } from "./subscriber/event/RemoveEvent"
 export type { SoftRemoveEvent } from "./subscriber/event/SoftRemoveEvent"
 export type { RecoverEvent } from "./subscriber/event/RecoverEvent"
-export type { TransactionCommitEvent } from "./subscriber/event/TransactionCommitEvent"
-export type { TransactionRollbackEvent } from "./subscriber/event/TransactionRollbackEvent"
-export type { TransactionStartEvent } from "./subscriber/event/TransactionStartEvent"
-export type { EntitySubscriberInterface } from "./subscriber/EntitySubscriberInterface"
+export type {
+    TransactionCommitEvent,
+} from "./subscriber/event/TransactionCommitEvent"
+export type {
+    TransactionRollbackEvent,
+} from "./subscriber/event/TransactionRollbackEvent"
+export type {
+    TransactionStartEvent,
+} from "./subscriber/event/TransactionStartEvent"
+export type {
+    EntitySubscriberInterface,
+} from "./subscriber/EntitySubscriberInterface"
 export { EntitySchema } from "./entity-schema/EntitySchema"
-export type { EntitySchemaColumnOptions } from "./entity-schema/EntitySchemaColumnOptions"
-export type { EntitySchemaIndexOptions } from "./entity-schema/EntitySchemaIndexOptions"
-export type { EntitySchemaRelationOptions } from "./entity-schema/EntitySchemaRelationOptions"
-export { EntitySchemaEmbeddedColumnOptions } from "./entity-schema/EntitySchemaEmbeddedColumnOptions"
+export type {
+    EntitySchemaColumnOptions,
+} from "./entity-schema/EntitySchemaColumnOptions"
+export type {
+    EntitySchemaIndexOptions,
+} from "./entity-schema/EntitySchemaIndexOptions"
+export type {
+    EntitySchemaRelationOptions,
+} from "./entity-schema/EntitySchemaRelationOptions"
+export {
+    EntitySchemaEmbeddedColumnOptions,
+} from "./entity-schema/EntitySchemaEmbeddedColumnOptions"
 export type { ColumnType } from "./driver/types/ColumnTypes"
 export { EntitySchemaOptions } from "./entity-schema/EntitySchemaOptions"
 export { InstanceChecker } from "./util/InstanceChecker"

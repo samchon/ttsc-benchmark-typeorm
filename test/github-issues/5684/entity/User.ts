@@ -16,7 +16,7 @@ export class User {
     name: string
 
     @ManyToOne(() => Company, (company) => company.staff, {
-        eager: true, // <- this cases the bug.
+        eager: true,
     })
     @JoinColumn()
     company: Company

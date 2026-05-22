@@ -462,7 +462,9 @@ export class QueryExpressionMap {
      */
     get relationMetadata(): RelationMetadata {
         if (!this.mainAlias)
-            throw new TypeORMError(`Entity to work with is not specified!`) // todo: better message
+            throw new TypeORMError(
+                `Entity to work with is not specified!`,
+            ) // todo: better message
 
         const relationMetadata =
             this.mainAlias.metadata.findRelationWithPropertyPath(

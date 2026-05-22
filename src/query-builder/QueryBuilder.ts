@@ -153,7 +153,9 @@ export abstract class QueryBuilder<Entity extends ObjectLiteral> {
      */
     get alias(): string {
         if (!this.expressionMap.mainAlias)
-            throw new TypeORMError(`Main alias is not set`) // todo: better exception
+            throw new TypeORMError(
+                `Main alias is not set`,
+            ) // todo: better exception
 
         return this.expressionMap.mainAlias.name
     }
@@ -516,7 +518,10 @@ export abstract class QueryBuilder<Entity extends ObjectLiteral> {
         const [sql, parameters] = this.getQueryAndParameters()
         const queryRunner = this.obtainQueryRunner()
         try {
-            return await queryRunner.query(sql, parameters) // await is needed here because we are using finally
+            return await queryRunner.query(
+                sql,
+                parameters,
+            ) // await is needed here because we are using finally
         } finally {
             if (queryRunner !== this.queryRunner) {
                 // means we created our own query runner

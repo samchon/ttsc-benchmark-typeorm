@@ -258,7 +258,9 @@ export class EmbeddedMetadata {
 
         prefixes.push(...this.buildPartialPrefix())
 
-        return prefixes.join("_") // todo: use naming strategy instead of "_"  !!!
+        return prefixes.join(
+            "_",
+        ) // todo: use naming strategy instead of "_"  !!!
     }
 
     protected buildParentPropertyNames(): string[] {

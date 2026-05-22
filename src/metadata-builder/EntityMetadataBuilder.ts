@@ -453,7 +453,9 @@ export class EntityMetadataBuilder {
         const inheritanceTree: any[] =
             typeof tableArgs.target === "function"
                 ? MetadataUtils.getInheritanceTree(tableArgs.target)
-                : [tableArgs.target] // todo: implement later here inheritance for string-targets
+                : [
+                      tableArgs.target,
+                  ] // todo: implement later here inheritance for string-targets
 
         const tableInheritance = this.metadataArgsStorage.findInheritanceType(
             tableArgs.target,

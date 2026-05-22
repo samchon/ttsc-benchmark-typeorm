@@ -18,7 +18,6 @@ export class Post {
     lastUpdated: Date
 
     @Column({
-        // Forcing this column to only be written on insert time
         update: false,
     })
     readOnlyColumn: number

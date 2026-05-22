@@ -11,7 +11,6 @@ import type { FindOneOptions } from "../find-options/FindOneOptions"
 import type {
     CreateIndexesOptions,
     ReplaceOptions,
-    //
     AggregateOptions,
     AggregationCursor,
     AnyBulkWriteOperation,

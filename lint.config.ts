@@ -1,4 +1,4 @@
-import type { ITtscLintConfig } from "@ttsc/lint";
+import type { ITtscLintConfig } from "@ttsc/lint"
 
 export default {
   ignores: [
@@ -10,8 +10,15 @@ export default {
     "src/driver/mongodb/{typings.ts,bson.typings.ts}",
     "temp/**",
   ],
+  format: {
+    printWidth: 80,
+    tabWidth: 4,
+    useTabs: false,
+    semi: false,
+    trailingComma: "all",
+  },
   rules: {
     "no-var": "error",
     "prefer-const": "error",
   },
-} satisfies ITtscLintConfig;
+} satisfies ITtscLintConfig

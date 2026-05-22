@@ -26,7 +26,9 @@ export class SubjectTopologicalSorter {
     // -------------------------------------------------------------------------
 
     constructor(subjects: Subject[]) {
-        this.subjects = [...subjects] // copy subjects to prevent changing of sent array
+        this.subjects = [
+            ...subjects,
+        ] // copy subjects to prevent changing of sent array
         this.metadatas = this.getUniqueMetadatas(this.subjects)
     }
 
@@ -133,17 +135,20 @@ export class SubjectTopologicalSorter {
      * We need to execute insertions first for entities which non-nullable relations.
      */
     protected getNonNullableDependencies(): string[][] {
-        return this.metadatas.reduce((dependencies, metadata) => {
-            metadata.relationsWithJoinColumns.forEach((relation) => {
-                if (relation.isNullable) return
+        return this.metadatas.reduce(
+            (dependencies, metadata) => {
+                metadata.relationsWithJoinColumns.forEach((relation) => {
+                    if (relation.isNullable) return
 
-                dependencies.push([
-                    metadata.targetName,
-                    relation.inverseEntityMetadata.targetName,
-                ])
-            })
-            return dependencies
-        }, [] as string[][])
+                    dependencies.push([
+                        metadata.targetName,
+                        relation.inverseEntityMetadata.targetName,
+                    ])
+                })
+                return dependencies
+            },
+            [] as string[][],
+        )
     }
 
     /**

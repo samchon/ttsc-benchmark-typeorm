@@ -962,7 +962,10 @@ export class SapDriver implements Driver {
     protected escapeComment(comment?: string) {
         if (!comment) return comment
 
-        comment = comment.replaceAll("\u0000", "") // Null bytes aren't allowed in comments
+        comment = comment.replaceAll(
+            "\u0000",
+            "",
+        ) // Null bytes aren't allowed in comments
 
         return comment
     }

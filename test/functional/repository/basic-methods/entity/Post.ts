@@ -16,7 +16,7 @@ export class Post {
     @Column({
         nullable: true,
         unique: true,
-        name: "eXtErNal___id", // makes sure we test handling differing property/database names where necessary
+        name: "eXtErNal___id",
     })
     externalId?: string
 
@@ -46,7 +46,7 @@ export class Post {
     createdAt!: Date
 
     @UpdateDateColumn({
-        name: "uPdAtEd___At", // makes sure we test handling differing property/database names where necessary
+        name: "uPdAtEd___At",
     })
     updatedAt!: Date
 }

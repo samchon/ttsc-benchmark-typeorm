@@ -112,7 +112,9 @@ export class OneToOneInverseSideSubjectBuilder {
         // extract only relation id from the related entities, since we only need it for comparison
         // by example: extract from category only relation id (category id, or let's say category title, depend on join column options)
         let relationIdMap =
-            relation.inverseEntityMetadata!.getEntityIdMap(relatedEntity) // by example: relationIdMap is category.id map here, e.g. { id: ... }
+            relation.inverseEntityMetadata!.getEntityIdMap(
+                relatedEntity,
+            ) // by example: relationIdMap is category.id map here, e.g. { id: ... }
 
         // try to find a subject of this related entity, maybe it was loaded or was marked for persistence
         let relatedEntitySubject = this.subjects.find((operateSubject) => {

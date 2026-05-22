@@ -17,7 +17,6 @@ export class Test {
 
     @Column({
         generatedType: "STORED",
-        // asExpression is needed here or generatedType above will be ignored
         asExpression: "concat(`firstName`,' ',`lastName`)",
     })
     name: string

@@ -1,18 +1,18 @@
 {
   "name": "Profile",
   "table": {
-    "name": "profile"
+    "name": "profile",
   },
   "columns": {
     "id": {
       "type": "int",
       "generated": true,
-      "primary": true
+      "primary": true,
     },
     "country": {
       "type": "varchar",
-      "nullable": false
-    }
+      "nullable": false,
+    },
   },
   "relations": {
     "user": {
@@ -20,7 +20,7 @@
       "inverseSide": "profile",
       "type": "one-to-one",
       "joinColumn": false,
-      "lazy": true
-    }
-  }
+      "lazy": true,
+    },
+  },
 }

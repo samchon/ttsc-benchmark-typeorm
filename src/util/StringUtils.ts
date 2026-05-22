@@ -58,10 +58,13 @@ export function abbreviate(str: string, abbrLettersCount: number = 1): string {
     const words = str
         .replaceAll(/([a-z\xE0-\xFF])([A-Z\xC0\xDF])/g, "$1 $2")
         .split(" ")
-    return words.reduce((res, word) => {
-        res += word.slice(0, abbrLettersCount)
-        return res
-    }, "")
+    return words.reduce(
+        (res, word) => {
+            res += word.slice(0, abbrLettersCount)
+            return res
+        },
+        "",
+    )
 }
 
 export interface IShortenOptions {

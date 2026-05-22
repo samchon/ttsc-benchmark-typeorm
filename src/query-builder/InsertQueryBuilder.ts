@@ -453,7 +453,9 @@ export class InsertQueryBuilder<
             this.dataSource.driver.options.type === "oracle" &&
             this.getValueSets().length > 1
                 ? null
-                : this.createReturningExpression("insert") // oracle doesnt support returning with multi-row insert
+                : this.createReturningExpression(
+                      "insert",
+                  ) // oracle doesnt support returning with multi-row insert
         const columnsExpression = this.createColumnNamesExpression()
         let query = "INSERT "
 
