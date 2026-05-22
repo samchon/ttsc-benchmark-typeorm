@@ -1,6 +1,5 @@
 import ansi from "ansis"
 import path from "path"
-import type yargs from "yargs"
 import { PlatformTools } from "../platform/PlatformTools"
 import { camelCase } from "../util/StringUtils"
 import { CommandUtils } from "./CommandUtils"

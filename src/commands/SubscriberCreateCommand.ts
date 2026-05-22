@@ -1,6 +1,5 @@
 import ansi from "ansis"
 import path from "path"
-import type yargs from "yargs"
 import { PlatformTools } from "../platform/PlatformTools"
 import { CommandUtils } from "./CommandUtils"
 
