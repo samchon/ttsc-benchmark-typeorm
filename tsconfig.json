@@ -6,7 +6,6 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "module": "commonjs",
-    "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
