@@ -2,6 +2,7 @@ import ansi from "ansis"
 import path from "path"
 import { PlatformTools } from "../platform/PlatformTools"
 import { CommandUtils } from "./CommandUtils"
+import type * as yargs from "yargs"
 
 /**
  * Generates a new entity.
