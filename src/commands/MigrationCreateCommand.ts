@@ -3,6 +3,7 @@ import path from "path"
 import { PlatformTools } from "../platform/PlatformTools"
 import { camelCase } from "../util/StringUtils"
 import { CommandUtils } from "./CommandUtils"
+import type * as yargs from "yargs"
 
 /**
  * Creates a new migration file.
