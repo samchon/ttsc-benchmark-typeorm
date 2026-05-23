@@ -1295,12 +1295,7 @@ export class CockroachQueryRunner
             upQueries.push(
                 this.createUniqueConstraintSql(table, uniqueConstraint),
             )
-            downQueries.push(
-                this.dropIndexSql(
-                    table,
-                    uniqueConstraint.name!,
-                ),
-            ) // CockroachDB creates indices for unique constraints
+            downQueries.push(this.dropIndexSql(table, uniqueConstraint.name!)) // CockroachDB creates indices for unique constraints
         }
 
         // create column's comment
@@ -2325,12 +2320,7 @@ export class CockroachQueryRunner
                 clonedTable.uniques.indexOf(columnUnique),
                 1,
             )
-            upQueries.push(
-                this.dropIndexSql(
-                    table,
-                    columnUnique.name!,
-                ),
-            ) // CockroachDB creates indices for unique constraints
+            upQueries.push(this.dropIndexSql(table, columnUnique.name!)) // CockroachDB creates indices for unique constraints
             downQueries.push(
                 this.createUniqueConstraintSql(table, columnUnique),
             )
@@ -4451,10 +4441,7 @@ export class CockroachQueryRunner
             return "NULL"
         }
 
-        comment = comment.replaceAll("'", "''").replaceAll(
-            "\u0000",
-            "",
-        ) // Null bytes aren't allowed in comments
+        comment = comment.replaceAll("'", "''").replaceAll("\u0000", "") // Null bytes aren't allowed in comments
 
         return `'${comment}'`
     }

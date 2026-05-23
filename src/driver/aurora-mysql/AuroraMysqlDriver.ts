@@ -1075,6 +1075,7 @@ export class AuroraMysqlDriver implements Driver {
                 port: credentials.port,
                 ssl: options.ssl,
             },
+
             options.extra ?? {},
         )
     }
@@ -1141,10 +1142,7 @@ export class AuroraMysqlDriver implements Driver {
     protected escapeComment(comment?: string) {
         if (!comment) return comment
 
-        comment = comment.replaceAll(
-            "\u0000",
-            "",
-        ) // Null bytes aren't allowed in comments
+        comment = comment.replaceAll("\u0000", "") // Null bytes aren't allowed in comments
 
         return comment
     }

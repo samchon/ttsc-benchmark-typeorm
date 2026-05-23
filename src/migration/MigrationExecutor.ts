@@ -508,9 +508,7 @@ export class MigrationExecutor {
         if (this.dataSource.driver.options.type === "mongodb") {
             return
         }
-        const tableExist = await queryRunner.hasTable(
-            this.migrationsTable,
-        ) // todo: table name should be configurable
+        const tableExist = await queryRunner.hasTable(this.migrationsTable) // todo: table name should be configurable
         if (!tableExist) {
             await queryRunner.createTable(
                 new Table({

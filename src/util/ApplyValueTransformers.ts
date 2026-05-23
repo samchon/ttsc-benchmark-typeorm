@@ -27,12 +27,9 @@ export class ApplyValueTransformers {
         }
 
         if (Array.isArray(transformer)) {
-            return transformer.reduce(
-                (transformedValue, _transformer) => {
-                    return _transformer.to(transformedValue)
-                },
-                entityValue,
-            )
+            return transformer.reduce((transformedValue, _transformer) => {
+                return _transformer.to(transformedValue)
+            }, entityValue)
         }
         return transformer.to(entityValue)
     }

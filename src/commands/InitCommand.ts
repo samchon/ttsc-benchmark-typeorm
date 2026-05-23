@@ -3,6 +3,7 @@ import path from "node:path"
 import { TypeORMError } from "../error"
 import { PlatformTools } from "../platform/PlatformTools"
 import { CommandUtils } from "./CommandUtils"
+import type * as yargs from "yargs"
 
 /**
  * Generates a new project with TypeORM.

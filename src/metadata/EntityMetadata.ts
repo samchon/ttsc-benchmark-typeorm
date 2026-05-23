@@ -675,9 +675,7 @@ export class EntityMetadata {
         if (this.hasMultiplePrimaryKeys) {
             return idMap
         } else if (idMap) {
-            return this.primaryColumns[0].getEntityValue(
-                idMap,
-            ) // todo: what about parent primary column?
+            return this.primaryColumns[0].getEntityValue(idMap) // todo: what about parent primary column?
         }
 
         return idMap

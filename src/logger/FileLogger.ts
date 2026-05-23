@@ -118,9 +118,6 @@ export class FileLogger extends AbstractLogger {
         strings = (strings as string[]).map(
             (str) => "[" + new Date().toISOString() + "]" + str,
         )
-        PlatformTools.appendFileSync(
-            logPath,
-            strings.join("\r\n") + "\r\n",
-        ) // todo: use async or implement promises?
+        PlatformTools.appendFileSync(logPath, strings.join("\r\n") + "\r\n") // todo: use async or implement promises?
     }
 }

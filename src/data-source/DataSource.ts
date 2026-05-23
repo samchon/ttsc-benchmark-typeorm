@@ -518,10 +518,7 @@ export class DataSource {
         const usedQueryRunner = queryRunner ?? this.createQueryRunner()
 
         try {
-            return await usedQueryRunner.query(
-                query,
-                parameters,
-            ) // await is needed here because we are using finally
+            return await usedQueryRunner.query(query, parameters) // await is needed here because we are using finally
         } finally {
             if (!queryRunner) await usedQueryRunner.release()
         }

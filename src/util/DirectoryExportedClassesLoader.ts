@@ -42,12 +42,9 @@ export async function importClassesFromDirectories(
         return allLoaded
     }
 
-    const allFiles = directories.reduce(
-        (allDirs, dir) => {
-            return allDirs.concat(globSync(PlatformTools.pathNormalize(dir)))
-        },
-        [] as string[],
-    )
+    const allFiles = directories.reduce((allDirs, dir) => {
+        return allDirs.concat(globSync(PlatformTools.pathNormalize(dir)))
+    }, [] as string[])
 
     if (directories.length > 0 && allFiles.length === 0) {
         logger.log(logLevel, `${classesNotFoundMessage} "${directories}"`)
