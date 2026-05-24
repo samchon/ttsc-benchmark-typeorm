@@ -7,8 +7,6 @@ export default {
     "node_modules/**",
     "packages/**",
     "playground/**",
-    "src/driver/mongodb/typings.ts",
-    "src/driver/mongodb/bson.typings.ts",
     "temp/**",
   ],
   format: {
