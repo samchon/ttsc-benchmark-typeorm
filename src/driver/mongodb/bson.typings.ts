@@ -1,5 +1,6 @@
 /**
  * A class representation of the BSON Binary type.
+ *
  * @public
  * @category BSONType
  */
@@ -14,6 +15,7 @@ export declare class Binary extends BSONValue {
     static readonly SUBTYPE_FUNCTION = 1
     /**
      * Legacy default BSON Binary type
+     *
      * @deprecated BSON Binary subtype 2 is deprecated in the BSON specification
      */
     static readonly SUBTYPE_BYTE_ARRAY = 2
@@ -83,6 +85,7 @@ export declare class Binary extends BSONValue {
     position: number
     /**
      * Create a new Binary instance.
+     *
      * @param buffer - a buffer object containing the binary data.
      * @param subType - the option binary type.
      */
@@ -155,6 +158,7 @@ export declare class Binary extends BSONValue {
     toBits(): Int8Array
     /**
      * Constructs a Binary representing an Int8 Vector.
+     *
      * @param array - The array to store as a view on the Binary class
      */
     static fromInt8Array(array: Int8Array): Binary
@@ -168,6 +172,7 @@ export declare class Binary extends BSONValue {
     static fromPackedBits(array: Uint8Array, padding?: number): Binary
     /**
      * Constructs a Binary representing an Packed Bit Vector.
+     *
      * @param array - The array of 1s and 0s to pack into the Binary instance
      */
     static fromBits(bits: ArrayLike<number>): Binary
@@ -191,13 +196,7 @@ export declare interface BinaryExtendedLegacy {
 export declare type BinarySequence = Uint8Array | number[]
 
 declare namespace BSON {
-    export {
-        setInternalBufferSize,
-        serialize,
-        serializeWithBufferAndIndex,
-        deserialize,
-        calculateObjectSize,
-        deserializeStream,
+    export type {
         UUIDExtended,
         BinaryExtended,
         BinaryExtendedLegacy,
@@ -222,9 +221,21 @@ declare namespace BSON {
         LongWithoutOverrides,
         TimestampExtended,
         TimestampOverrides,
-        LongWithoutOverridesClass,
         SerializeOptions,
         DeserializeOptions,
+        BSONTypeTag,
+        OnDemand,
+        Document,
+        CalculateObjectSizeOptions,
+    }
+    export {
+        setInternalBufferSize,
+        serialize,
+        serializeWithBufferAndIndex,
+        deserialize,
+        calculateObjectSize,
+        deserializeStream,
+        LongWithoutOverridesClass,
         Code,
         BSONSymbol,
         DBRef,
@@ -243,7 +254,6 @@ declare namespace BSON {
         ByteUtils,
         BSONValue,
         bsonType,
-        BSONTypeTag,
         BSONError,
         BSONVersionError,
         BSONRuntimeError,
@@ -251,9 +261,6 @@ declare namespace BSON {
         BSONType,
         EJSON,
         onDemand,
-        OnDemand,
-        Document,
-        CalculateObjectSizeOptions,
     }
 }
 export { BSON }
@@ -326,6 +333,7 @@ export declare class BSONOffsetError extends BSONError {
 
 /**
  * A class representation of the BSON RegExp type.
+ *
  * @public
  * @category BSONType
  */
@@ -364,7 +372,6 @@ export declare interface BSONRegExpExtendedLegacy {
  *
  * An error generated when BSON functions encounter an unexpected input
  * or reaches an unexpected/invalid internal state
- *
  */
 export declare class BSONRuntimeError extends BSONError {
     get name(): "BSONRuntimeError"
@@ -373,6 +380,7 @@ export declare class BSONRuntimeError extends BSONError {
 
 /**
  * A class representation of the BSON Symbol type.
+ *
  * @public
  * @category BSONType
  */
@@ -571,6 +579,7 @@ export declare type CalculateObjectSizeOptions = Pick<
 
 /**
  * A class representation of the BSON Code type.
+ *
  * @public
  * @category BSONType
  */
@@ -600,6 +609,7 @@ export declare interface CodeExtended {
 
 /**
  * A class representation of the BSON DBRef type.
+ *
  * @public
  * @category BSONType
  */
@@ -637,6 +647,7 @@ export declare interface DBRefLike {
 
 /**
  * A class representation of the BSON Decimal128 type.
+ *
  * @public
  * @category BSONType
  */
@@ -704,41 +715,49 @@ export declare function deserialize(
 export declare interface DeserializeOptions {
     /**
      * when deserializing a Long return as a BigInt.
+     *
      * @defaultValue `false`
      */
     useBigInt64?: boolean
     /**
      * when deserializing a Long will fit it into a Number if it's smaller than 53 bits.
+     *
      * @defaultValue `true`
      */
     promoteLongs?: boolean
     /**
      * when deserializing a Binary will return it as a node.js Buffer instance.
+     *
      * @defaultValue `false`
      */
     promoteBuffers?: boolean
     /**
      * when deserializing will promote BSON values to their Node.js closest equivalent types.
+     *
      * @defaultValue `true`
      */
     promoteValues?: boolean
     /**
      * allow to specify if there what fields we wish to return as unserialized raw buffer.
+     *
      * @defaultValue `null`
      */
     fieldsAsRaw?: Document
     /**
      * return BSON regular expressions as BSONRegExp instances.
+     *
      * @defaultValue `false`
      */
     bsonRegExp?: boolean
     /**
      * allows the buffer to be larger than the parsed BSON object.
+     *
      * @defaultValue `false`
      */
     allowObjectSmallerThanBufferSize?: boolean
     /**
      * Offset into buffer to begin reading document from
+     *
      * @defaultValue `0`
      */
     index?: number
@@ -757,6 +776,7 @@ export declare interface DeserializeOptions {
      *  // disables validation only on specified keys a, b
      *  validation: { utf8: { a: false, b: false } }
      * ```
+     *
      */
     validation?: {
         utf8: boolean | Record<string, true> | Record<string, false>
@@ -791,6 +811,7 @@ export declare interface Document {
 
 /**
  * A class representation of the BSON Double type.
+ *
  * @public
  * @category BSONType
  */
@@ -861,11 +882,13 @@ export declare type EJSONOptions = EJSONSerializeOptions & EJSONParseOptions
 export declare type EJSONOptionsBase = {
     /**
      * Output using the Extended JSON v1 spec
+     *
      * @defaultValue `false`
      */
     legacy?: boolean
     /**
      * Enable Extended JSON's `relaxed` mode, which attempts to return native JS types where possible, rather than BSON types
+     *
      * @defaultValue `false`
      */
     relaxed?: boolean
@@ -875,6 +898,7 @@ export declare type EJSONOptionsBase = {
 export declare type EJSONParseOptions = EJSONOptionsBase & {
     /**
      * Enable native bigint support
+     *
      * @defaultValue `false`
      */
     useBigInt64?: boolean
@@ -895,6 +919,7 @@ declare function EJSONserialize(
 export declare type EJSONSerializeOptions = EJSONOptionsBase & {
     /**
      * Omits undefined values from the output instead of converting them to null
+     *
      * @defaultValue `false`
      */
     ignoreUndefined?: boolean
@@ -904,6 +929,7 @@ declare type InspectFn = (x: unknown, options?: unknown) => string
 
 /**
  * A class representation of a BSON Int32 type.
+ *
  * @public
  * @category BSONType
  */
@@ -950,6 +976,7 @@ export declare interface Int32Extended {
 
 /**
  * A class representing a 64-bit integer
+ *
  * @public
  * @category BSONType
  * @remarks
@@ -1025,6 +1052,7 @@ export declare class Long extends BSONValue {
     /**
      * Returns a Long representing the 64 bit integer that comes by concatenating the given low and high bits.
      * Each is assumed to use 32 bits.
+     *
      * @param lowBits - The low 32 bits
      * @param highBits - The high 32 bits
      * @param unsigned - Whether unsigned or not, defaults to signed
@@ -1033,6 +1061,7 @@ export declare class Long extends BSONValue {
     static fromBits(lowBits: number, highBits: number, unsigned?: boolean): Long
     /**
      * Returns a Long representing the given 32 bit integer value.
+     *
      * @param value - The 32 bit integer in question
      * @param unsigned - Whether unsigned or not, defaults to signed
      * @returns The corresponding Long value
@@ -1040,6 +1069,7 @@ export declare class Long extends BSONValue {
     static fromInt(value: number, unsigned?: boolean): Long
     /**
      * Returns a Long representing the given value, provided that it is a finite number. Otherwise, zero is returned.
+     *
      * @param value - The number in question
      * @param unsigned - Whether unsigned or not, defaults to signed
      * @returns The corresponding Long value
@@ -1047,6 +1077,7 @@ export declare class Long extends BSONValue {
     static fromNumber(value: number, unsigned?: boolean): Long
     /**
      * Returns a Long representing the given value, provided that it is a finite number. Otherwise, zero is returned.
+     *
      * @param value - The number in question
      * @param unsigned - Whether unsigned or not, defaults to signed
      * @returns The corresponding Long value
@@ -1061,6 +1092,7 @@ export declare class Long extends BSONValue {
      * - the string contains whitespace
      * - the value the string represents is too large or too small to be a Long
      * Unlike Long.fromString, this method does not coerce '+/-Infinity' and 'NaN' to Long.Zero
+     *
      * @param str - The textual representation of the Long
      * @returns The corresponding Long value
      */
@@ -1073,6 +1105,7 @@ export declare class Long extends BSONValue {
      * - the string contains whitespace
      * - the value the string represents is too large or too small to be a Long
      * Unlike Long.fromString, this method does not coerce '+/-Infinity' and 'NaN' to Long.Zero
+     *
      * @param str - The textual representation of the Long
      * @param unsigned - Whether unsigned or not, defaults to signed
      * @returns The corresponding Long value
@@ -1086,6 +1119,7 @@ export declare class Long extends BSONValue {
      * - the string contains whitespace
      * - the value the string represents is too large or too small to be a Long
      * Unlike Long.fromString, this method does not coerce '+/-Infinity' and 'NaN' to Long.Zero
+     *
      * @param str - The textual representation of the Long
      * @param radix - The radix in which the text is written (2-36), defaults to 10
      * @returns The corresponding Long value
@@ -1099,6 +1133,7 @@ export declare class Long extends BSONValue {
      * - the string contains whitespace
      * - the value the string represents is too large or too small to be a Long
      * Unlike Long.fromString, this method does not coerce '+/-Infinity' and 'NaN' to Long.Zero
+     *
      * @param str - The textual representation of the Long
      * @param unsigned - Whether unsigned or not, defaults to signed
      * @param radix - The radix in which the text is written (2-36), defaults to 10
@@ -1133,6 +1168,7 @@ export declare class Long extends BSONValue {
      * - if the radix is less than 24, 'NaN' is coerced to Long.ZERO
      * - if the radix is less than 35, '+/-Infinity' inputs are coerced to Long.ZERO
      * - other invalid characters sequences have variable behavior
+     *
      * @param str - The textual representation of the Long
      * @param radix - The radix in which the text is written (2-36), defaults to 10
      * @returns The corresponding Long value
@@ -1148,6 +1184,7 @@ export declare class Long extends BSONValue {
      * - if the radix is less than 24, 'NaN' is coerced to Long.ZERO
      * - if the radix is less than 35, '+/-Infinity' inputs are coerced to Long.ZERO
      * - other invalid characters sequences have variable behavior
+     *
      * @param str - The textual representation of the Long
      * @param unsigned - Whether unsigned or not, defaults to signed
      * @returns The corresponding Long value
@@ -1163,6 +1200,7 @@ export declare class Long extends BSONValue {
      * - if the radix is less than 24, 'NaN' is coerced to Long.ZERO
      * - if the radix is less than 35, '+/-Infinity' inputs are coerced to Long.ZERO
      * - other invalid characters sequences have variable behavior
+     *
      * @param str - The textual representation of the Long
      * @param unsigned - Whether unsigned or not, defaults to signed
      * @param radix - The radix in which the text is written (2-36), defaults to 10
@@ -1171,6 +1209,7 @@ export declare class Long extends BSONValue {
     static fromString(str: string, unsigned?: boolean, radix?: number): Long
     /**
      * Creates a Long from its byte representation.
+     *
      * @param bytes - Byte representation
      * @param unsigned - Whether unsigned or not, defaults to signed
      * @param le - Whether little or big endian, defaults to big endian
@@ -1179,6 +1218,7 @@ export declare class Long extends BSONValue {
     static fromBytes(bytes: number[], unsigned?: boolean, le?: boolean): Long
     /**
      * Creates a Long from its little endian byte representation.
+     *
      * @param bytes - Little endian byte representation
      * @param unsigned - Whether unsigned or not, defaults to signed
      * @returns The corresponding Long value
@@ -1186,6 +1226,7 @@ export declare class Long extends BSONValue {
     static fromBytesLE(bytes: number[], unsigned?: boolean): Long
     /**
      * Creates a Long from its big endian byte representation.
+     *
      * @param bytes - Big endian byte representation
      * @param unsigned - Whether unsigned or not, defaults to signed
      * @returns The corresponding Long value
@@ -1197,6 +1238,7 @@ export declare class Long extends BSONValue {
     static isLong(value: unknown): value is Long
     /**
      * Converts the specified value to a Long.
+     *
      * @param unsigned - Whether unsigned or not, defaults to signed
      */
     static fromValue(
@@ -1214,11 +1256,13 @@ export declare class Long extends BSONValue {
     add(addend: string | number | Long | Timestamp): Long
     /**
      * Returns the sum of this and the specified Long.
+     *
      * @returns Sum
      */
     and(other: string | number | Long | Timestamp): Long
     /**
      * Compares this Long's value with the specified's.
+     *
      * @returns 0 if they are the same, 1 if the this is greater and -1 if the given one is greater
      */
     compare(other: string | number | Long | Timestamp): 0 | 1 | -1
@@ -1226,6 +1270,7 @@ export declare class Long extends BSONValue {
     comp(other: string | number | Long | Timestamp): 0 | 1 | -1
     /**
      * Returns this Long divided by the specified. The result is signed if this Long is signed or unsigned if this Long is unsigned.
+     *
      * @returns Quotient
      */
     divide(divisor: string | number | Long | Timestamp): Long
@@ -1233,6 +1278,7 @@ export declare class Long extends BSONValue {
     div(divisor: string | number | Long | Timestamp): Long
     /**
      * Tests if this Long's value equals the specified's.
+     *
      * @param other - Other value
      */
     equals(other: string | number | Long | Timestamp): boolean
@@ -1284,6 +1330,7 @@ export declare class Long extends BSONValue {
     rem(divisor: string | number | Long | Timestamp): Long
     /**
      * Returns the product of this and the specified Long.
+     *
      * @param multiplier - Multiplier
      * @returns Product
      */
@@ -1308,6 +1355,7 @@ export declare class Long extends BSONValue {
     or(other: number | string | Long): Long
     /**
      * Returns this Long with bits shifted to the left by the given amount.
+     *
      * @param numBits - Number of bits
      * @returns Shifted Long
      */
@@ -1316,6 +1364,7 @@ export declare class Long extends BSONValue {
     shl(numBits: number | Long): Long
     /**
      * Returns this Long with bits arithmetically shifted to the right by the given amount.
+     *
      * @param numBits - Number of bits
      * @returns Shifted Long
      */
@@ -1324,6 +1373,7 @@ export declare class Long extends BSONValue {
     shr(numBits: number | Long): Long
     /**
      * Returns this Long with bits logically shifted to the right by the given amount.
+     *
      * @param numBits - Number of bits
      * @returns Shifted Long
      */
@@ -1334,6 +1384,7 @@ export declare class Long extends BSONValue {
     shru(numBits: number | Long): Long
     /**
      * Returns the difference of this and the specified Long.
+     *
      * @param subtrahend - Subtrahend
      * @returns Difference
      */
@@ -1348,17 +1399,20 @@ export declare class Long extends BSONValue {
     toBigInt(): bigint
     /**
      * Converts this Long to its byte representation.
+     *
      * @param le - Whether little or big endian, defaults to big endian
      * @returns Byte representation
      */
     toBytes(le?: boolean): number[]
     /**
      * Converts this Long to its little endian byte representation.
+     *
      * @returns Little endian byte representation
      */
     toBytesLE(): number[]
     /**
      * Converts this Long to its big endian byte representation.
+     *
      * @returns Big endian byte representation
      */
     toBytesBE(): number[]
@@ -1368,6 +1422,7 @@ export declare class Long extends BSONValue {
     toSigned(): Long
     /**
      * Converts the Long to a string written in the specified radix.
+     *
      * @param radix - Radix (2-36), defaults to 10
      * @throws RangeError If `radix` is out of range
      */
@@ -1409,6 +1464,7 @@ export declare const LongWithoutOverridesClass: LongWithoutOverrides
 
 /**
  * A class representation of the BSON MaxKey type.
+ *
  * @public
  * @category BSONType
  */
@@ -1426,6 +1482,7 @@ export declare interface MaxKeyExtended {
 
 /**
  * A class representation of the BSON MinKey type.
+ *
  * @public
  * @category BSONType
  */
@@ -1475,6 +1532,7 @@ export declare const NumberUtils: NumberUtils
 
 /**
  * A class representation of the BSON ObjectId type.
+ *
  * @public
  * @category BSONType
  */
@@ -1517,6 +1575,7 @@ export declare class ObjectId extends BSONValue {
     constructor(inputId?: string | ObjectId | ObjectIdLike | Uint8Array)
     /**
      * The ObjectId bytes
+     *
      * @readonly
      */
     get id(): Uint8Array
@@ -1533,6 +1592,7 @@ export declare class ObjectId extends BSONValue {
     static generate(time?: number): Uint8Array
     /**
      * Converts the id into a 24 character hex string for printing, unless encoding is provided.
+     *
      * @param encoding - hex or base64
      */
     toString(encoding?: "hex" | "base64"): string
@@ -1567,6 +1627,7 @@ export declare class ObjectId extends BSONValue {
     static createFromBase64(base64: string): ObjectId
     /**
      * Checks if a value can be used to create a valid bson ObjectId
+     *
      * @param id - any JS value
      */
     static isValid(id: string | ObjectId | ObjectIdLike | Uint8Array): boolean
@@ -1631,6 +1692,7 @@ export declare const onDemand: OnDemand
  * // prints { int32: 10 }
  * console.log(EJSON.parse(text));
  * ```
+ *
  */
 declare function parse(text: string, options?: EJSONParseOptions): any
 
@@ -1650,23 +1712,27 @@ export declare function serialize(
 export declare interface SerializeOptions {
     /**
      * the serializer will check if keys are valid.
+     *
      * @defaultValue `false`
      */
     checkKeys?: boolean
     /**
      * serialize the javascript functions
+     *
      * @defaultValue `false`
      */
     serializeFunctions?: boolean
     /**
      * serialize will not emit undefined fields
      * note that the driver sets this to `false`
+     *
      * @defaultValue `true`
      */
     ignoreUndefined?: boolean
     /* Excluded from this release type: minInternalBufferSize */
     /**
      * the index in the buffer where we wish to start serializing into
+     *
      * @defaultValue `0`
      */
     index?: number
@@ -1717,6 +1783,7 @@ export declare function setInternalBufferSize(size: number): void
  * // prints '{"int32":10}'
  * console.log(EJSON.stringify(doc));
  * ```
+ *
  */
 declare function stringify(
     value: any,
@@ -1801,6 +1868,7 @@ export declare type TimestampOverrides =
 
 /**
  * A class representation of the BSON UUID type.
+ *
  * @public
  */
 export declare class UUID extends Binary {
@@ -1814,12 +1882,14 @@ export declare class UUID extends Binary {
     constructor(input?: string | Uint8Array | UUID)
     /**
      * The UUID bytes
+     *
      * @readonly
      */
     get id(): Uint8Array
     set id(value: Uint8Array)
     /**
      * Returns the UUID id as a 32 or 36 character hex string representation, excluding/including dashes (defaults to 36 character dash separated)
+     *
      * @param includeDashes - should the string exclude dash-separators.
      */
     toHexString(includeDashes?: boolean): string
@@ -1848,11 +1918,13 @@ export declare class UUID extends Binary {
     static generate(): Uint8Array
     /**
      * Checks if a value is a valid bson UUID
+     *
      * @param input - UUID, string or Buffer to validate.
      */
     static isValid(input: string | Uint8Array | UUID | Binary): boolean
     /**
      * Creates an UUID from a hex string representation of an UUID.
+     *
      * @param hexString - 32 or 36 character hex string (dashes excluded/included).
      */
     static createFromHexString(hexString: string): UUID
@@ -1864,7 +1936,6 @@ export declare class UUID extends Binary {
      * Converts to a string representation of this Id.
      *
      * @returns return the 36 character hex string representation.
-     *
      */
     inspect(depth?: number, options?: unknown, inspect?: InspectFn): string
 }
