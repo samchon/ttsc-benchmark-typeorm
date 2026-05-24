@@ -154,7 +154,7 @@
     "standard-changelog": "^7.0.1",
     "testcontainers": "^11.14.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
+    "typescript": "6.0.0-dev.20260416",
     "typescript-eslint": "^8.59.2"
   },
   "peerDependencies": {
