@@ -2,23 +2,13 @@ import js from "@eslint/js"
 import chaiFriendly from "eslint-plugin-chai-friendly"
 import { jsdoc } from "eslint-plugin-jsdoc"
 import unicorn from "eslint-plugin-unicorn"
-import { defineConfig, globalIgnores } from "eslint/config"
+import { defineConfig } from "eslint/config"
 import globals from "globals"
 import ts from "typescript-eslint"
 
 const __dirname = import.meta.dirname
 
 export default defineConfig([
-    globalIgnores([
-        "build/**",
-        "docs/**",
-        "node_modules/**",
-        "packages/**",
-        "playground/**",
-        "src/driver/mongodb/{typings.ts,bson.typings.ts}",
-        "temp/**",
-    ]),
-
     {
         files: ["**/*.ts"],
         languageOptions: {
