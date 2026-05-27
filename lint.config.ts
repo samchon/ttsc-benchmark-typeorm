@@ -10,14 +10,6 @@ import type { ITtscLintConfig } from "@ttsc/lint"
 // the bench cell entirely. See
 // .discussions/benchmark-fixtures-audit/alignment-typeorm.md.
 export default {
-  ignores: [
-    "build/**",
-    "docs/**",
-    "node_modules/**",
-    "packages/**",
-    "playground/**",
-    "temp/**",
-  ],
   format: {
     printWidth: 80,
     tabWidth: 4,
