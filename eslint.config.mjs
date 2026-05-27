@@ -1,13 +1,35 @@
-import js from "@eslint/js"
-import chaiFriendly from "eslint-plugin-chai-friendly"
-import { jsdoc } from "eslint-plugin-jsdoc"
-import unicorn from "eslint-plugin-unicorn"
 import { defineConfig } from "eslint/config"
-import globals from "globals"
 import ts from "typescript-eslint"
 
 const __dirname = import.meta.dirname
 
+// Aligned with @ttsc/lint per the benchmark-fixtures-audit policy.
+//
+// The upstream typeorm config extends `js.configs.recommended` and
+// `ts.configs.recommendedTypeChecked` plus the jsdoc, unicorn, and
+// chai-friendly plugin presets, exposing roughly 85 effective rules on
+// `**/*.ts`. The ttsc-lint side ships only `no-var` and `prefer-const`
+// (see lint.config.ts), so the original cross-tool comparison ran on a
+// ~85:2 rule imbalance.
+//
+// Path A from the audit policy (trim legacy): drop every preset and
+// keep only the two rules that have a counterpart in the ttsc-lint
+// config. See `.discussions/benchmark-fixtures-audit/alignment-typeorm.md`
+// for the dropped rule list.
+//
+// Notes:
+//   - The `@typescript-eslint` plugin is registered (no rules enabled)
+//     so that the codebase's pre-existing inline `eslint-disable
+//     @typescript-eslint/*` comments resolve. Without the registration
+//     ESLint v10 fails with `Definition for rule X was not found`.
+//   - `prefer-const` keeps the upstream `destructuring: "all"` option
+//     because ttsc-lint's `prefer-const` intentionally skips
+//     destructuring entirely (see linthost/rules_var.go), so the
+//     ESLint-default `destructuring: "any"` would surface destructure
+//     violations the ttsc-lint side never reports.
+//   - `parserOptions.project` is omitted because neither rule needs the
+//     type checker; the typescript-eslint parser is kept so `**/*.ts`
+//     files parse at all.
 export default defineConfig([
     {
         files: ["**/*.ts"],
@@ -15,109 +37,14 @@ export default defineConfig([
             parser: ts.parser,
             parserOptions: {
                 tsconfigRootDir: __dirname,
-                project: "tsconfig.json",
-            },
-            globals: {
-                ...globals.browser,
-                ...globals.node,
             },
         },
         plugins: {
-            js,
-            ts,
-            unicorn,
+            "@typescript-eslint": ts.plugin,
         },
-        extends: [js.configs.recommended, ...ts.configs.recommendedTypeChecked],
         rules: {
-            // custom rules
-            "@typescript-eslint/consistent-type-exports": "error",
-            "@typescript-eslint/consistent-type-imports": "error",
-            "@typescript-eslint/prefer-nullish-coalescing": "error",
-            "@typescript-eslint/prefer-optional-chain": "error",
-            "@typescript-eslint/prefer-string-starts-ends-with": "error",
-
-            "unicorn/prefer-string-replace-all": "error",
-            "unicorn/prefer-string-slice": "error",
-            "unicorn/prefer-string-starts-ends-with": "error",
-
-            // exceptions from typescript-eslint/recommended
-            "@typescript-eslint/ban-ts-comment": "warn",
-            "@typescript-eslint/no-empty-object-type": "warn",
-            "@typescript-eslint/no-explicit-any": "warn",
-            "@typescript-eslint/no-require-imports": "warn",
-            "@typescript-eslint/no-namespace": "off",
-            "@typescript-eslint/no-this-alias": "warn",
-            "@typescript-eslint/no-unnecessary-type-constraint": "warn",
-            "@typescript-eslint/no-unsafe-declaration-merging": "warn",
-            "@typescript-eslint/no-unsafe-function-type": "warn",
-            "@typescript-eslint/no-unused-vars": [
-                "warn",
-                {
-                    argsIgnorePattern: "^_",
-                    destructuredArrayIgnorePattern: "^_",
-                },
-            ],
-            "@typescript-eslint/no-wrapper-object-types": "off",
+            "no-var": "error",
             "prefer-const": ["error", { destructuring: "all" }],
-
-            // exceptions from typescript-eslint/recommended-type-checked
-            "@typescript-eslint/no-base-to-string": "off",
-            "@typescript-eslint/no-misused-promises": [
-                "error",
-                {
-                    checksConditionals: false,
-                    checksVoidReturn: false,
-                },
-            ],
-            "@typescript-eslint/no-redundant-type-constituents": "warn",
-            "@typescript-eslint/no-unnecessary-type-assertion": "off",
-            "@typescript-eslint/no-unsafe-argument": "off",
-            "@typescript-eslint/no-unsafe-assignment": "off",
-            "@typescript-eslint/no-unsafe-call": "off",
-            "@typescript-eslint/no-unsafe-member-access": "off",
-            "@typescript-eslint/no-unsafe-return": "off",
-            "@typescript-eslint/prefer-promise-reject-errors": "off",
-            "@typescript-eslint/require-await": "warn",
-            "@typescript-eslint/restrict-plus-operands": "warn",
-            "@typescript-eslint/restrict-template-expressions": "warn",
-            "@typescript-eslint/unbound-method": [
-                "warn",
-                { ignoreStatic: true },
-            ],
-
-            // exceptions for eslint/recommended
-            "no-async-promise-executor": "warn",
-            "no-useless-assignment": "warn",
-            "no-control-regex": "warn",
-            "no-empty": "warn",
-            "no-loss-of-precision": "warn",
-            "no-prototype-builtins": "warn",
-            "no-regex-spaces": "warn",
-            "no-return-assign": ["error", "always"],
-            "preserve-caught-error": "warn",
         },
-    },
-
-    jsdoc({
-        files: ["src/**/*.ts"],
-        config: "flat/recommended-typescript", // change to 'flat/recommended-typescript-error' once warnings are fixed
-        // Temporarily enable individual rules when they are fixed, until all current warnings are gone,
-        // and then remove manual config in favor of `config: "flat/recommended-typescript-error"`
-        rules: {
-            "jsdoc/valid-types": "error",
-            "jsdoc/tag-lines": [
-                "error",
-                "any",
-                {
-                    startLines: 1,
-                    tags: { example: { lines: "always", count: 1 } },
-                },
-            ],
-        },
-    }),
-
-    {
-        files: ["test/**/*.ts"],
-        ...chaiFriendly.configs.recommendedFlat,
     },
 ])
