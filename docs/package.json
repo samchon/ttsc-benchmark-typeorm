@@ -43,7 +43,7 @@
     "@docusaurus/module-type-aliases": "^3.10.1",
     "@docusaurus/tsconfig": "^3.10.1",
     "@docusaurus/types": "^3.10.1",
-    "typescript": "^5.9.3"
+    "typescript": "7.0.1-rc"
   },
   "packageManager": "pnpm@10.33.4",
   "engines": {
